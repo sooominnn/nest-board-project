@@ -71,5 +71,6 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  }
+  },
+  "eslintIgnore": ["ignorefile.js", "ignorefile2.js"]
 }

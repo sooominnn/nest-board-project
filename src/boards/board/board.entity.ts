@@ -1,9 +1,16 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Comment } from '../comment/entity/comment.entity';
 
 @Entity()
 export class Board extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  boardId: number;
 
   @Column()
   title: string;
@@ -15,5 +22,9 @@ export class Board extends BaseEntity {
   description: string;
 
   @Column()
-  date: string;
+  date: Date;
+
+  @Column()
+  status: string;
+
 }
