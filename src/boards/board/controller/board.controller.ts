@@ -15,6 +15,7 @@ import { Board } from '../board.entity';
 import { CreateBoardDto } from '../dto/createBoardDto';
 import { BoardStatusValidationPipe } from '../pipes/board-status-validation.pipe';
 import { BoardStatus } from '../board-status.enum';
+import { UpdateBoardDto } from '../dto/update-board.dto';
 @Controller('/boards')
 export class BoardController {
   constructor(private boardService: BoardService) {}
@@ -52,14 +53,21 @@ export class BoardController {
     return this.boardService.deleteBoard(id);
   }
 
-  // 게시글 내용 수정
+  // 게시글 수정
+  @Patch('/:boardId/update')
+  updateBoard(
+    @Param('boardId', ParseIntPipe) boardId: number,
+    @Body() updateBoardDto: UpdateBoardDto,
+  ): Promise<Board> {
+    return this.boardService.updateBoard(boardId, updateBoardDto);
+  }
 
-  // 게시물 상태 수정
+  // 게시글 상태 수정
   @Patch('/:boardId/status')
   updateBoardStatus(
-    @Param('boardId', ParseIntPipe) id: number,
+    @Param('boardId', ParseIntPipe) boardId: number,
     @Body('status', BoardStatusValidationPipe) status: BoardStatus,
   ) {
-    return this.boardService.updateBoardStatus(id, status);
+    return this.boardService.updateBoardStatus(boardId, status);
   }
 }

@@ -1,5 +1,4 @@
 import { IsNotEmpty } from 'class-validator';
-import { Board } from '../board.entity';
 
 export class CreateBoardDto {
   @IsNotEmpty()

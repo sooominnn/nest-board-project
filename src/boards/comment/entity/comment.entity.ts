@@ -1,6 +1,12 @@
-import { BaseEntity, Column, Index, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Board } from '../../board/board.entity';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  Index,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
+@Entity()
 export class Comment extends BaseEntity {
   @PrimaryGeneratedColumn()
   commentId: number;
