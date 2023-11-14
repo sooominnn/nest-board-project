@@ -9,6 +9,7 @@ import { Comment } from '../entity/comment.entity';
 import { CreateCommentDto } from '../dto/create-comment.dto';
 import { CommentStatus } from '../comment-status.enum';
 import { BoardService } from '../../board/service/board.service';
+import { UpdateCommentDto } from '../dto/update-comment.dto';
 
 @Injectable()
 export class CommentService {
@@ -68,6 +69,19 @@ export class CommentService {
     }
 
     return found;
+  }
+
+  // 댓글 수정
+  async updateComment(
+    id: number,
+    updateCommentDto: UpdateCommentDto,
+  ): Promise<Comment> {
+    const comment = await this.getCommentById(id);
+
+    comment.description = updateCommentDto.description;
+
+    await this.commentRepository.save(comment);
+    return comment;
   }
 
   // 댓글 상태 수정
