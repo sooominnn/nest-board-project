@@ -32,16 +32,20 @@ export class CommentService {
 
   // 댓글 생성
   async createComment(createCommentDto: CreateCommentDto): Promise<Comment> {
+    console.log('111');
     // 유효성 검사: boardId가 존재하는지
     if (!createCommentDto.boardId) {
       throw new BadRequestException('boardId is required');
     }
+    console.log('222');
 
     // 유효성 검사: boardId가 유효한지 확인
     await this.boardService.getBoardById(createCommentDto.boardId);
+    console.log('333');
 
     // 댓글 생성
     const comment = this.commentRepository.createComment(createCommentDto);
+    console.log('444');
 
     return comment;
   }
