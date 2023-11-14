@@ -15,6 +15,7 @@ import { CommentService } from '../service/comment.service';
 import { CommentStatusValidationPipe } from '../pipes/comment-status-validation.pipe';
 import { CommentStatus } from '../comment-status.enum';
 import { Comment } from '../entity/comment.entity';
+import { UpdateCommentDto } from '../dto/update-comment.dto';
 
 @Controller('/boards/comments')
 export class CommentController {
@@ -43,7 +44,14 @@ export class CommentController {
     return this.commentService.deleteComment(commentId);
   }
 
-  // 댓글 내용 수정
+  // 댓글 수정
+  @Patch('/:commentId/update')
+  updateComment(
+    @Param('commentId', ParseIntPipe) commentId: number,
+    @Body() updateCommentDto: UpdateCommentDto,
+  ): Promise<Comment> {
+    return this.commentService.updateComment(commentId, updateCommentDto);
+  }
 
   // 댓글 상태 수정
   @Patch('/:commentId/status')
