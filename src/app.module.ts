@@ -7,6 +7,7 @@ import { BoardHeartModule } from './boards/boardHeart/module/boardHeart.module';
 import { BoardHeart } from './boards/boardHeart/boardHeart.entity';
 import { Board } from './boards/board/board.entity';
 import { Comment } from './boards/comment/entity/comment.entity';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeORMConfig),
@@ -16,6 +17,7 @@ import { Comment } from './boards/comment/entity/comment.entity';
     BoardModule,
     CommentModule,
     BoardHeartModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
