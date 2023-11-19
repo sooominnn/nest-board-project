@@ -1,16 +1,19 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import * as dotenv from 'dotenv';
 import { Board } from '../boards/board/board.entity';
-import { Comment } from '../boards/comment/entity/comment.entity';
 import { BoardHeart } from '../boards/boardHeart/boardHeart.entity';
 import { User } from '../auth/user.entity';
+import { Comment } from '../boards/comment/entity/comment.entity';
+
+dotenv.config(); // .env 파일에서 환경 변수 로드
 
 export const typeORMConfig: TypeOrmModuleOptions = {
-  type: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: 'postgres',
-  password: 'postgres',
-  database: 'board-app',
+  type: process.env.DB_TYPE as 'postgres',
+  host: process.env.DB_HOST,
+  port: parseInt(process.env.DB_PORT, 10),
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
   entities: [
     __dirname + '/../**/*.entity.{js}',
     Board,
@@ -18,5 +21,5 @@ export const typeORMConfig: TypeOrmModuleOptions = {
     BoardHeart,
     User,
   ],
-  synchronize: true,
+  synchronize: process.env.DB_SYNCHRONIZE === 'true' || false,
 };

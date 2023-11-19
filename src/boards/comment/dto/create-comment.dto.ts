@@ -5,6 +5,9 @@ export class CreateCommentDto {
   boardId: number;
 
   @IsNotEmpty()
+  userId: number;
+
+  @IsNotEmpty()
   writer: string;
 
   @IsNotEmpty()
