@@ -2,6 +2,9 @@ import { IsNotEmpty } from 'class-validator';
 
 export class CreateBoardDto {
   @IsNotEmpty()
+  userId: number;
+
+  @IsNotEmpty()
   title: string;
 
   @IsNotEmpty()

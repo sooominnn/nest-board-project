@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -16,6 +17,8 @@ import { CreateBoardDto } from '../dto/createBoardDto';
 import { BoardStatusValidationPipe } from '../pipes/board-status-validation.pipe';
 import { BoardStatus } from '../board-status.enum';
 import { UpdateBoardDto } from '../dto/update-board.dto';
+import { AuthGuard } from '@nestjs/passport';
+
 @Controller('/boards')
 export class BoardController {
   constructor(private boardService: BoardService) {}
@@ -43,6 +46,7 @@ export class BoardController {
   // 게시글 생성
   @Post()
   @UsePipes(ValidationPipe)
+  @UseGuards(AuthGuard('jwt'))
   createBoard(@Body() createBoardDto: CreateBoardDto): Promise<Board> {
     return this.boardService.createBoard(createBoardDto);
   }

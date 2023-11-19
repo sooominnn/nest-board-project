@@ -35,3 +35,10 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 package-lock.json
+
+#config
+default.yaml
+development.yaml
+production.yaml
+
+.env

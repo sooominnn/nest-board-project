@@ -1,12 +1,12 @@
-import { Repository } from 'typeorm';
-import { User } from './user.entity';
-import { CustomRepository } from '../boards/typeorm-ex.decorator';
-import { AuthCredentialsDto } from './dto/auth-credential.dto';
 import {
   ConflictException,
   InternalServerErrorException,
 } from '@nestjs/common';
-import bcrypt from 'bcrypt';
+import { Repository } from 'typeorm';
+import { AuthCredentialsDto } from './dto/auth-credential.dto';
+import { User } from './user.entity';
+import * as bcrypt from 'bcrypt';
+import { CustomRepository } from '../boards/typeorm-ex.decorator';
 
 @CustomRepository(User)
 export class UserRepository extends Repository<User> {
@@ -27,7 +27,5 @@ export class UserRepository extends Repository<User> {
         throw new InternalServerErrorException();
       }
     }
-
-    await this.save(user);
   }
 }

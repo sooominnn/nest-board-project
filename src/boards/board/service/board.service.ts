@@ -5,6 +5,7 @@ import { Board } from '../board.entity';
 import { CreateBoardDto } from '../dto/createBoardDto';
 import { BoardStatus } from '../board-status.enum';
 import { UpdateBoardDto } from '../dto/update-board.dto';
+
 @Injectable()
 export class BoardService {
   constructor(

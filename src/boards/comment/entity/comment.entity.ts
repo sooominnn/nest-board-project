@@ -26,4 +26,8 @@ export class Comment extends BaseEntity {
   @Index()
   @Column()
   boardId: number;
+
+  @Index()
+  @Column()
+  userId: number;
 }
