@@ -9,7 +9,7 @@ import {
 @Entity()
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  userId: number;
 
   @Column()
   @Unique(['username'])
@@ -17,4 +17,7 @@ export class User extends BaseEntity {
 
   @Column()
   password: string;
+
+  @Column({ default: 'member' }) // admin or member
+  status: string;
 }

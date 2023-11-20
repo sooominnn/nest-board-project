@@ -16,6 +16,9 @@ export class CreateBoardDto {
   @IsNotEmpty()
   date: Date;
 
+  // @IsNotEmpty()
+  // isNotice: boolean;
+
   // toEntity(): Board {
   //   console.log(445);
   //   const board = new Board();

@@ -1,4 +1,10 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  Index,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Board extends BaseEntity {
@@ -19,4 +25,11 @@ export class Board extends BaseEntity {
 
   @Column()
   status: string;
+
+  @Index()
+  @Column()
+  userId: number;
+
+  @Column({ default: false })
+  isNotice: boolean; // 공지글 여부
 }

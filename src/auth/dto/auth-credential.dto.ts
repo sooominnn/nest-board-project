@@ -1,9 +1,16 @@
-import { IsString, Matches, MaxLength, MinLength } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsString,
+  Matches,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
 export class AuthCredentialsDto {
   @IsString()
   @MinLength(2)
   @MaxLength(20)
+  @IsNotEmpty()
   username: string;
 
   @IsString()
@@ -12,5 +19,9 @@ export class AuthCredentialsDto {
   @Matches(/^[a-zA-Z0-9]*$/, {
     message: 'password only accepts english and number',
   })
+  @IsNotEmpty()
   password: string;
+
+  @IsNotEmpty()
+  status: string;
 }
