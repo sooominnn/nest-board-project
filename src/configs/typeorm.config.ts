@@ -2,7 +2,7 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
 import { Board } from '../boards/board/board.entity';
 import { BoardHeart } from '../boards/boardHeart/boardHeart.entity';
-import { User } from '../auth/user.entity';
+import { User } from '../auth/user/user.entity';
 import { Comment } from '../boards/comment/entity/comment.entity';
 
 dotenv.config(); // .env 파일에서 환경 변수 로드

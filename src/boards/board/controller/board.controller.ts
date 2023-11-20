@@ -18,6 +18,7 @@ import { BoardStatusValidationPipe } from '../pipes/board-status-validation.pipe
 import { BoardStatus } from '../board-status.enum';
 import { UpdateBoardDto } from '../dto/update-board.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { User } from '../../../auth/user/user.entity';
 
 @Controller('/boards')
 export class BoardController {
@@ -44,11 +45,15 @@ export class BoardController {
   // }
 
   // 게시글 생성
-  @Post()
+  @Post('/:userId')
   @UsePipes(ValidationPipe)
   @UseGuards(AuthGuard('jwt'))
-  createBoard(@Body() createBoardDto: CreateBoardDto): Promise<Board> {
-    return this.boardService.createBoard(createBoardDto);
+  createBoard(
+    @Body() createBoardDto: CreateBoardDto,
+    @Param('userId') userId: number,
+  ): Promise<Board> {
+    console.log('11');
+    return this.boardService.createBoard(userId, createBoardDto);
   }
 
   // 게시글 삭제
