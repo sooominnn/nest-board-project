@@ -31,11 +31,8 @@ export class UploadService {
           reject(err);
         } else {
           // 이미지 업로드 성공 시 해당 이미지의 URL을 반환
-          const imageUrl = this.s3.getSignedUrl('getObject', {
-            Bucket: process.env.AWS_S3_BUCKET,
-            Key: key,
-          });
-          resolve(imageUrl);
+          const baseUrl = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_S3_REGION}.amazonaws.com/${key}`;
+          resolve(baseUrl);
         }
       });
     });
