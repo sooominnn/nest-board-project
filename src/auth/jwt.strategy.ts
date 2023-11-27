@@ -5,6 +5,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { User } from './user/user.entity';
 import { UserRepository } from './user/user.repository';
 
+// dotenv.config();
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(

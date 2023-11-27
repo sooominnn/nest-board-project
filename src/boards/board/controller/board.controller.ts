@@ -18,7 +18,6 @@ import { BoardStatusValidationPipe } from '../pipes/board-status-validation.pipe
 import { BoardStatus } from '../board-status.enum';
 import { UpdateBoardDto } from '../dto/update-board.dto';
 import { AuthGuard } from '@nestjs/passport';
-import { User } from '../../../auth/user/user.entity';
 
 @Controller('/boards')
 export class BoardController {
