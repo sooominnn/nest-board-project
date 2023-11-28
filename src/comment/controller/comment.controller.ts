@@ -17,27 +17,27 @@ import { CommentStatus } from '../comment-status.enum';
 import { Comment } from '../entity/comment.entity';
 import { UpdateCommentDto } from '../dto/update-comment.dto';
 
-@Controller('/boards/comments')
+@Controller()
 export class CommentController {
   constructor(private commentService: CommentService) {}
 
   // 해당 게시물 댓글 조회
-  @Get('/:boardId')
+  @Get('/boards/comments/:boardId')
   getCommentByBoardId(@Param('boardId') boardId: number): Promise<Comment[]> {
-    console.log(222);
+    console.log('해당 게시물 댓글 조회-controller');
     return this.commentService.getCommentByBoardId(boardId);
   }
 
   // 댓글 생성
-  @Post()
+  @Post('/boards/comments')
   @UsePipes(ValidationPipe)
   createComment(@Body() createCommentDto: CreateCommentDto): Promise<Comment> {
-    console.log('댓글생성');
+    console.log('댓글생성-controller');
     return this.commentService.createComment(createCommentDto);
   }
 
   // 댓글 삭제
-  @Delete('/:commentId')
+  @Delete('/boards/comments/:commentId')
   deleteComment(
     @Param('commentId', ParseIntPipe) commentId: number,
   ): Promise<void> {
@@ -45,7 +45,7 @@ export class CommentController {
   }
 
   // 댓글 수정
-  @Patch('/:commentId/update')
+  @Patch('/boards/comments/:commentId/update')
   updateComment(
     @Param('commentId', ParseIntPipe) commentId: number,
     @Body() updateCommentDto: UpdateCommentDto,
@@ -54,7 +54,7 @@ export class CommentController {
   }
 
   // 댓글 상태 수정
-  @Patch('/:commentId/status')
+  @Patch('/boards/comments/:commentId/status')
   updateCommentStatus(
     @Param('commentId', ParseIntPipe) commentId: number,
     @Body('status', CommentStatusValidationPipe) status: CommentStatus,

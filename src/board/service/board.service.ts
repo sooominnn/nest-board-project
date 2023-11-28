@@ -5,7 +5,7 @@ import { Board } from '../board.entity';
 import { CreateBoardDto } from '../dto/createBoardDto';
 import { BoardStatus } from '../board-status.enum';
 import { UpdateBoardDto } from '../dto/update-board.dto';
-import { UserService } from '../../../auth/user/user.service';
+import { UserService } from '../../auth/user/user.service';
 
 @Injectable()
 export class BoardService {
@@ -52,17 +52,17 @@ export class BoardService {
     createBoardDto: CreateBoardDto,
   ): Promise<Board> {
     const user = await this.userService.getUserById(userId);
-    console.log('User:', user);
+    console.log('게시글 생성-service, User:', user);
     const isNotice = user.status === 'admin';
-    console.log('가나다라');
-    const { title, writer, description, date } = createBoardDto;
-    console.log(title, writer, description, date, userId);
+    console.log('게시글 생성-isNotice 다음-service');
+    const { title, description } = createBoardDto;
+    console.log(title, description, userId);
 
     const board = new Board();
     board.title = title;
-    board.writer = writer;
+    board.writer = user.username;
     board.description = description;
-    board.date = date;
+    // board.date = date;
     board.status = BoardStatus.PUBLIC;
     board.userId = userId;
     board.isNotice = isNotice;
@@ -75,7 +75,7 @@ export class BoardService {
     //   userId,
     //   isNotice,
     // });
-    console.log(12);
+    console.log('게시글 생성 완료-service');
 
     await this.boardRepository.save(board);
     return board;

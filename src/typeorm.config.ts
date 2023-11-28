@@ -1,9 +1,9 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
-import { Board } from '../boards/board/board.entity';
-import { BoardHeart } from '../boards/boardHeart/boardHeart.entity';
-import { User } from '../auth/user/user.entity';
-import { Comment } from '../boards/comment/entity/comment.entity';
+import { Board } from './board/board.entity';
+import { BoardHeart } from './boardHeart/boardHeart.entity';
+import { User } from './auth/user/user.entity';
+import { Comment } from './comment/entity/comment.entity';
 
 dotenv.config(); // .env 파일에서 환경 변수 로드
 
@@ -15,7 +15,8 @@ export const typeORMConfig: TypeOrmModuleOptions = {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
   entities: [
-    __dirname + '/../**/*.entity.{js}',
+    __dirname + '/**/*.entity.ts',
+    __dirname + '/**/*.entity.js',
     Board,
     Comment,
     BoardHeart,

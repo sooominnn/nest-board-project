@@ -12,7 +12,4 @@ export class CreateCommentDto {
 
   @IsNotEmpty()
   description: string;
-
-  @IsNotEmpty()
-  date: Date;
 }

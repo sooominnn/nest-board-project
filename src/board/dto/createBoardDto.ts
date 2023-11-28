@@ -6,15 +6,15 @@ export class CreateBoardDto {
 
   @IsNotEmpty()
   title: string;
-
-  @IsNotEmpty()
-  writer: string;
+  //
+  // @IsNotEmpty()
+  // writer: string;
 
   @IsNotEmpty()
   description: string;
 
-  @IsNotEmpty()
-  date: Date;
+  // @IsNotEmpty()
+  // date: Date;
 
   // @IsNotEmpty()
   // isNotice: boolean;

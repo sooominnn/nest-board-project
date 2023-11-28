@@ -1,18 +1,16 @@
 import {
   BaseEntity,
   Column,
+  CreateDateColumn,
   Entity,
   Index,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
 @Entity()
-export class Board extends BaseEntity {
+export class Comment extends BaseEntity {
   @PrimaryGeneratedColumn()
-  boardId: number;
-
-  @Column()
-  title: string;
+  commentId: number;
 
   @Column()
   writer: string;
@@ -21,6 +19,7 @@ export class Board extends BaseEntity {
   description: string;
 
   @Column()
+  @CreateDateColumn({ type: 'timestamp' })
   date: Date;
 
   @Column()
@@ -28,8 +27,9 @@ export class Board extends BaseEntity {
 
   @Index()
   @Column()
-  userId: number;
+  boardId: number;
 
-  @Column({ default: false })
-  isNotice: boolean; // 공지글 여부
+  @Index()
+  @Column()
+  userId: number;
 }

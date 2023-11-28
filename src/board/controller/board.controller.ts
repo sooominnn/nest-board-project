@@ -46,12 +46,12 @@ export class BoardController {
   // 게시글 생성
   @Post('/:userId')
   @UsePipes(ValidationPipe)
-  @UseGuards(AuthGuard('jwt'))
+  // @UseGuards(AuthGuard())
   createBoard(
     @Body() createBoardDto: CreateBoardDto,
     @Param('userId') userId: number,
   ): Promise<Board> {
-    console.log('11');
+    console.log('게시글 생성-controller');
     return this.boardService.createBoard(userId, createBoardDto);
   }
 
