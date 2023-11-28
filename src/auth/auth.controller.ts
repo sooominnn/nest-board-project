@@ -1,24 +1,26 @@
 import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { AuthCredentialsDto } from './dto/auth-credential.dto';
+import { SignUpCredentialsDto } from './dto/signup-credentials.dto';
+import { SignInCredentialsDto } from './dto/signin-credentials.dto';
+import { JwtPayload } from './jwt-payload.interface';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  // 회원가입
+  // 회원 가입
   @Post('/signup')
   signUp(
-    @Body(ValidationPipe) authCredentialsDto: AuthCredentialsDto,
-  ): Promise<void> {
-    return this.authService.signUp(authCredentialsDto);
+    @Body(ValidationPipe) signUpCredentialsDto: SignUpCredentialsDto,
+  ): Promise<{ message: string }> {
+    return this.authService.signUp(signUpCredentialsDto);
   }
 
   // 로그인
   @Post('/signin')
   signIn(
-    @Body(ValidationPipe) authCredentialsDto: AuthCredentialsDto,
-  ): Promise<{ accessToken: string }> {
-    return this.authService.signIn(authCredentialsDto);
+    @Body(ValidationPipe) signInCredentialsDto: SignInCredentialsDto,
+  ): Promise<{ accessToken: string; user: JwtPayload }> {
+    return this.authService.signIn(signInCredentialsDto);
   }
 }
