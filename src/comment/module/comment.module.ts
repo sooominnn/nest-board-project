@@ -3,10 +3,10 @@ import { Module } from '@nestjs/common';
 import { CommentController } from '../controller/comment.controller';
 import { CommentRepository } from '../comment.repository';
 import { CommentService } from '../service/comment.service';
+import { UserRepository } from '../../auth/user/user.repository';
+import { UserService } from '../../auth/user/user.service';
 import { BoardService } from '../../board/service/board.service';
 import { BoardRepository } from '../../board/board.repository';
-import { UserRepository } from '../../../auth/user/user.repository';
-import { UserService } from '../../../auth/user/user.service';
 
 @Module({
   imports: [
@@ -17,6 +17,6 @@ import { UserService } from '../../../auth/user/user.service';
     ]),
   ],
   controllers: [CommentController],
-  providers: [BoardService, CommentService, UserService],
+  providers: [CommentService, BoardService, UserService],
 })
 export class CommentModule {}

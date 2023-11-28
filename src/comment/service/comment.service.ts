@@ -33,20 +33,20 @@ export class CommentService {
 
   // 댓글 생성
   async createComment(createCommentDto: CreateCommentDto): Promise<Comment> {
-    console.log('111');
+    console.log('댓글 생성-boardId 존재여부-service');
     // 유효성 검사: boardId가 존재하는지
     if (!createCommentDto.boardId) {
       throw new BadRequestException('boardId is required');
     }
-    console.log('222');
+    console.log('댓글 생성-boardId 존재여부 확인 완료-service');
 
     // 유효성 검사: boardId가 유효한지 확인
     await this.boardService.getBoardById(createCommentDto.boardId);
-    console.log('333');
+    console.log('유효성 검사-service');
 
     // 댓글 생성
     const comment = this.commentRepository.createComment(createCommentDto);
-    console.log('444');
+    console.log('댓글 생성-댓글 저장완료-service');
 
     return comment;
   }
@@ -55,20 +55,24 @@ export class CommentService {
   async deleteComment(commentId: number): Promise<void> {
     const result = await this.commentRepository.delete(commentId);
 
+    console.log('댓글 삭제-service');
     if (result.affected === 0) {
       throw new NotFoundException(`Can't find Comment with id ${commentId}`);
     }
   }
 
   // 특정 댓글 조회
-  getCommentById(commentId: number) {
-    const found = this.commentRepository.findOne({ where: { commentId } });
+  async getCommentById(commentId: number): Promise<Comment> {
+    const comment = await this.commentRepository.findOne({
+      where: { commentId },
+    });
 
-    if (!found) {
-      throw new NotFoundException(`Can't find Comment with id ${commentId}`);
+    if (!comment) {
+      // 댓글을 찾지 못한 경우 예외
+      throw new NotFoundException(`Comment with ID ${commentId} not found`);
     }
 
-    return found;
+    return comment;
   }
 
   // 댓글 수정
@@ -76,11 +80,15 @@ export class CommentService {
     id: number,
     updateCommentDto: UpdateCommentDto,
   ): Promise<Comment> {
+    console.log('댓글 수정 확인 콘솔~-service');
+
     const comment = await this.getCommentById(id);
+    console.log('댓글 수정-getCommentById-service');
 
     comment.description = updateCommentDto.description;
 
     await this.commentRepository.save(comment);
+    console.log('댓글 수정 완료-service');
     return comment;
   }
 
